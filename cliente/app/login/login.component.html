@@ -1,0 +1,41 @@
+
+<md-card>
+  <img src="../../assets/img/turbus-starken.png">
+  <md-card-content>
+    <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+      <md-input-container class="example-full-width">
+        <input mdInput type="text" id="usuario" name="usuario"
+               [(ngModel)]="model.usualogin" #usualogin="ngModel"
+               placeholder="Usuario" required />
+         <md-error >
+            Por favor ingrese el usuario
+          </md-error>
+      </md-input-container>
+
+      <md-input-container class="example-full-width">
+      <input mdInput type="password" id="password" name="password"
+             [(ngModel)]="model.usuapass" #usuapass="ngModel"
+             placeholder="Contraseña" required />
+              <md-error>
+                Por favor ingresa su credencial
+              </md-error>
+       </md-input-container>
+
+    </form>
+  </md-card-content>
+  <md-card-actions>
+    <button [disabled]="loading" class="btn waves-effect waves-light green">
+      Login
+      <i class="material-icons right ">send</i>
+    </button>
+
+    <a routerLink="['/register']" class="btn waves-effect waves-light green">
+      Registro
+      <i class="material-icons right ">supervisor_account</i>
+    </a>
+    <div *ngIf="loading" class="progress">
+      <div class="indeterminate"></div>
+    </div>
+
+  </md-card-actions>
+</md-card>

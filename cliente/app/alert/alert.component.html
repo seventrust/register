@@ -1,0 +1,4 @@
+<div class="card-panel"
+*ngIf="message" [ngClass]="{'alert': message, 'green': message.tipo === 'success', 'red': message.type === 'error'}">
+  <p>{{message.text}}</p>
+</div>

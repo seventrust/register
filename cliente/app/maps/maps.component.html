@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col m3">
+    <div class="row">
+      <div class="col s6">
+        <div class="chip">
+          <img src="../assets/img/user_logo.png" alt="Contact Person">
+          Yerffrey
+        </div>
+      </div>
+      <div class="col s6">
+        <div class="switch">
+          <label>
+            Off
+            <input type="checkbox">
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col m9">
+      <agm-map [latitude]="lat" [longitude]="lon">
+        <agm-marker
+          *ngFor="let marker of markers"
+          [latitude]="marker.lat"
+          [longitude]="marker.lon">
+        </agm-marker>
+      </agm-map>
+    </div>
+  </div>
+</div>

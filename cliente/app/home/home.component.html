@@ -1,0 +1,35 @@
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a >Mi Perfil</a></li>
+  <li class="divider"></li>
+  <li><a [routerLink]="['/login']">Cerrar Sesión</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper green darken-3">
+    <a href="javascript:void(0);" data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" href="javascript:void(0);" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+  </div>
+</nav>
+
+<ul id="slide-out" class="side-nav">
+  <li><div class="user-view">
+    <div class="background">
+      <img src="../assets/img/map_banner.png">
+    </div>
+    <a href="javascript:void(0);"><img class="circle" src="../assets/img/user_logo.png"></a>
+    <a href="javascript:void(0);"><span class="black-text name">{{currentUser.usuanombre}} {{currentUser.usuapellido}}</span></a>
+    <a href="javascript:void(0);"><span class="black-text email">{{currentUser.usuamail}}</span></a>
+  </div></li>
+  <li><a href="javascript:void(0);" class="waves-effect"><i class="material-icons">cloud</i>Primer enlace</a></li>
+  <li><div class="divider"></div></li>
+  <li><a href="javascript:void(0);" class="waves-effect"><i class="material-icons">group_work</i>Segundo enlace</a></li>
+  <li><div class="divider"></div></li>
+  <li><a href="javascript:void(0);" class="waves-effect"><i class="material-icons">question_answer</i>Tercer enlace</a></li>
+  <!--<li><a class="subheader">Subheader</a></li>
+  <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>-->
+</ul>
+<router-outlet></router-outlet>
