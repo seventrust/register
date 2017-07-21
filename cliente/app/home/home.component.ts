@@ -13,16 +13,16 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(JSON.parse(localStorage.getItem("currentUser")));
+    console.log(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngAfterViewInit(){
     $(document).ready(function(){
-      $(".button-collapse").sideNav({
+      $('.button-collapse').sideNav({
         closeOnClick: true
       });
-    })
+    });
   }
 
 }
