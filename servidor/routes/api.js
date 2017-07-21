@@ -23,29 +23,60 @@ router.post('/authenticate', (req, res) => {
         })
     }
 
-    db.collection('usuarios').find({usualogin: usualogin, usuapass: usuapass}, {usuapass: false}).toArray((error, usuarios) => {
+    db.collection('usuarios').find({usualogin: usualogin, usuapass: usuapass}, {usuapass: false})
+    .toArray((error, usuarios) => {
       if(error){
         res.status(404).send({
             estatus: ERROR_BUSQUEDA,
             mensaje: 'No se encuentra el usuario'
         })
       }
+      if(usuarios){
+        let user = usuarios[0]
+        req.session.usualogin = user.usualogin
+        req.session.usuamail = user.usuamail
 
-      req.session.usualogin = usuarios.usualogin
-      req.session.usuamail = usuarios.usuamail
+        console.log(req.session.usualogin)
+        res.status(200).send(usuarios[0])
+      }else {
+        res.status(404).send({
+            estatus: ERROR_BUSQUEDA,
+            mensaje: 'No se encuentra el usuario'
+        })
+      }
 
-      res.status(200).send(usuarios[0])
     })
 
   })
 })
 
 router.get('/logout', (req, res) => {
-  console.log("Me llamaron para matar a medio MUNDO")
+  if(req.session){
+    req.session.destroy(error => {
+      if(error){
+        console.log(error)
+      }else{
+        res.status(200).send({
+          tipo: SUCCESS,
+          mensaje: "Sesion destruida satisfacttoriamente"
+        })
+      }
+    })
+  }
 })
 
 router.get('/check', (req, res) => {
-  console.log("Me llamaron para chequear a medio MUNDO")
+  if(req.session.usualogin){
+    res.status(200).send({
+      estatus: SUCCESS,
+      mensaje: "El usuario ya se encuentra logueado"
+    })
+  }else {
+    res.status(404).send({
+      estatus: ERROR_BUSQUEDA,
+      mensaje: "El usuario no se encuentra logueado"
+    })
+  }
 })
 
 module.exports = router

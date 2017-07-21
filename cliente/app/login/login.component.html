@@ -1,29 +1,27 @@
-
-<md-card>
-  <img src="../../assets/img/turbus-starken.png">
-  <md-card-content>
-    <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-      <md-input-container class="example-full-width">
-        <input mdInput type="text" id="usuario" name="usuario"
+<div class="row center">
+  <div class="col s12 m12">
+    <div class="card">
+      <div class="card-image">
+        <img src="../../assets/img/turbus-starken.png">
+      </div>
+      <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+        <div class="card-content">
+          <div class="input-field">
+            <input mdInput type="text" id="usuario" name="usuario"
                [(ngModel)]="model.usualogin" #usualogin="ngModel"
                placeholder="Usuario" required />
-         <md-error >
-            Por favor ingrese el usuario
-          </md-error>
-      </md-input-container>
+             <label for="usuario" class="green-text text-darken-2" data-error="Usuario Requerido">Usuario</label>
+          </div>
 
-      <md-input-container class="example-full-width">
+      <div class="input-field">
       <input mdInput type="password" id="password" name="password"
              [(ngModel)]="model.usuapass" #usuapass="ngModel"
-             placeholder="Contraseña" required />
-              <md-error>
-                Por favor ingresa su credencial
-              </md-error>
-       </md-input-container>
+             placeholder="Password" required />
+             <label for="pass" class="green-text text-darken-2" data-error="Password Requerido">Contraseña</label>
+         </div>
+       </div>
 
-    </form>
-  </md-card-content>
-  <md-card-actions>
+  <div class="card-action">
     <button [disabled]="loading" class="btn waves-effect waves-light green">
       Login
       <i class="material-icons right ">send</i>
@@ -37,5 +35,8 @@
       <div class="indeterminate"></div>
     </div>
 
-  </md-card-actions>
-</md-card>
+  </div>
+  </form>
+</div>
+</div>
+</div>
