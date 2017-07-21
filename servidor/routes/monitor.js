@@ -1,13 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const mysql = require('mysql')
+const mongo = require('mongodb').MongoClient
+const assert = require('assert')
 
-var conn = mysql.createConnection({
-    host: 'rdsqa.cfg37zfw51jp.us-west-2.rds.amazonaws.com',
-    user: 'root',
-    pass: 'moisesqa',
-    database: 'ruteo'
-})
+var monUrl = 'mongodb://localhost:27017/rutas'
 
 var ERROR_BD = -1
 var ERROR_BUSQUEDA = -2
@@ -15,18 +11,23 @@ var SUCCESS = 1
 
 router.get('/rutas', (req, res) => {
   if(req.session){
-    conn.connect()
-    conn.query('SELECT * FROM mv_traking_movil WHERE fecha_track >= "2017-07-05"', (err, rows, fields) => {
-      if(!err){
-        console.log(fields)
-        res.status(200).send(rows)
+    mongo.connect(monUrl, (err, db) => {
+      if(err) throw err
 
-      }else{
-        res.status(500).send({
-          tipo: ERROR_BD,
-          mensaje: `Error en la base de datos ${err}`
-        })
-      }
+      db.collection('mv_tracking_movil')
+        .find({}).toArray((e, rutas) => {
+        if(e) throw e
+
+        if(rutas.length > 0){
+          console.log(rutas);
+          res.status(200).send(rutas)
+        }else {
+          res.status(400).send({
+            estatus: ERROR_BUSQUEDA,
+            mensaje: 'No se encontraron resultados'
+          })
+        }
+      })
     })
   }else{
     res.status(200).send({
