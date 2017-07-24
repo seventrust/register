@@ -16,6 +16,7 @@ import { AlertComponent } from './alert/alert.component';
 import { AlertaService, AutenticacionService, MarkerService } from './_servicios/index';
 import { customHttpProvider } from './_helper/custom-http';
 import { GuardianGuard } from './_guardia/guardian.guard';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { GuardianGuard } from './_guardia/guardian.guard';
     HomeComponent,
     LoginComponent,
     MapsComponent,
-    AlertComponent
+    AlertComponent,
+    UsersComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

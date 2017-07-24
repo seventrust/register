@@ -16,7 +16,12 @@ export class MapsComponent implements OnInit {
   constructor(private markerService: MarkerService) { }
 
   ngOnInit() {
-    this.markers = this.markerService.getMarkers();
+   this.getHeroes();
+    console.log(JSON.stringify(this.markers));
   }
+  getHeroes(): void {
+    this.markerService.getMarkers()
+      .then(markers => this.markers = markers);
 
+  }
 }
