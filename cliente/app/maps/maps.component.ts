@@ -12,6 +12,7 @@ export class MapsComponent implements OnInit {
   markers: Marker[];
   lat: number = -33.4485353;
   lon: number = -70.6969406;
+  zoom: number = 8;
   constructor(private markerService: MarkerService) { }
 
   ngOnInit() {
