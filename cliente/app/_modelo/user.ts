@@ -3,5 +3,5 @@ export class User {
   usualogin: string;
   usuanombre: string;
   usuapellido: string;
-  usuamail: string;
+  usuaemail: string;
 }

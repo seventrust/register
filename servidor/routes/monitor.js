@@ -16,9 +16,10 @@ var SUCCESS = 1
 
 router.get('/rutas', (req, res) => {
   if(req.session){
+    let fecha = Date();
 
     var SQL = `SELECT id_movil, latitud_track, longitud_track, imei
-    FROM mv_tracking_movil WHERE fecha_track >= "2017-07-05"`;
+    FROM mv_tracking_movil WHERE fecha_track >= "2017-07-25"`;
 
     conn.query(SQL,
     (err, rows, fields) => {

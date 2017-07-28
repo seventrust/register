@@ -1,3 +1,4 @@
+
 <div class="row center">
   <div class="col s12 m12">
     <div class="card">
@@ -8,35 +9,60 @@
         <div class="card-content">
           <div class="input-field">
             <input mdInput type="text" id="usuario" name="usuario"
-               [(ngModel)]="model.usualogin" #usualogin="ngModel"
-               placeholder="Usuario" required />
+               [(ngModel)]="model.usualogin" #usualogin="ngModel" required />
              <label for="usuario" class="green-text text-darken-2" data-error="Usuario Requerido">Usuario</label>
           </div>
 
-      <div class="input-field">
-      <input mdInput type="password" id="password" name="password"
-             [(ngModel)]="model.usuapass" #usuapass="ngModel"
-             placeholder="Password" required />
-             <label for="pass" class="green-text text-darken-2" data-error="Password Requerido">Contraseña</label>
-         </div>
-       </div>
+          <div class="input-field">
+            <input mdInput type="password" id="password" name="password"
+                 [(ngModel)]="model.usuapass" #usuapass="ngModel"
+                 required />
+            <label for="password" class="green-text text-darken-2" data-error="Password Requerido">Contraseña</label>
+          </div>
+        </div>
 
-  <div class="card-action">
-    <button [disabled]="loading" class="btn waves-effect waves-light green">
-      Login
-      <i class="material-icons right ">send</i>
-    </button>
+        <div class="card-action">
+          <button [disabled]="loading" class="btn waves-effect waves-light green">
+            Login
+            <i class="material-icons right ">send</i>
+          </button>
 
-    <a routerLink="['/register']" class="btn waves-effect waves-light green">
-      Registro
-      <i class="material-icons right ">supervisor_account</i>
-    </a>
-    <div *ngIf="loading" class="progress">
-      <div class="indeterminate"></div>
+          <a routerLink="['/register']" class="btn waves-effect waves-light green">
+            Registro
+            <i class="material-icons right ">supervisor_account</i>
+          </a>
+          <div *ngIf="loading" class="progress">
+            <div class="indeterminate"></div>
+          </div>
+        </div>
+      </form>
     </div>
-
   </div>
-  </form>
 </div>
-</div>
-</div>
+
+<footer class="page-footer green">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Footer Content</h5>
+        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">Links</h5>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      © 2014 Copyright Text
+      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+    </div>
+  </div>
+</footer>
+
