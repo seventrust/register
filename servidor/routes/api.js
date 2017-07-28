@@ -1,9 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const mongo = require('mongodb').MongoClient
-const assert = require('assert')
+const mysql = require('mysql')
 
-var monUrl = 'mongodb://localhost:27017/usuarios'
+var conn = mysql.createConnection({
+  host: 'localhost',
+  port: '13307',
+  user: 'root',
+  password: 'moisesqa',
+  database: 'web_ctacte_tbc_amz'
+})
+
 
 var ERROR_BD = -1
 var ERROR_BUSQUEDA = -2
@@ -11,42 +17,31 @@ var SUCCESS = 1
 
 router.post('/authenticate', (req, res) => {
 
-  let usualogin = req.body.usualogin
-  let usuapass = req.body.usuapass
+  let usuario = req.body.usualogin
+  let password = req.body.usuapass
+  console.log(`Los datos ${usuario}, ${password}`)
 
-  mongo.connect(monUrl, (err, db) => {
-    if(err){
-      console.error(`Ha ocurrido un error ${err}`)
-      res.status(404).send({
-          estatus: ERROR_BD,
-          mensaje: 'Un error en la base de datos ' +err
-        })
+  var SQL = `SELECT usualogin, usuanombre, usuapaterno, usuaemail
+  FROM ma_usuario_web WHERE usualogin = '${usuario}' AND usuapass = '${password}'`
+
+  conn.query(SQL, (error, rows, fields) => {
+    if (error) {
+      let mensaje = {
+        tipo: ERROR_BD,
+        mensaje: `Error de conexion a la base de datos -> ${error}`
+      }
+      res.status(500).send(mensaje)
+    } else {
+      if(rows.length > 0) {
+        req.session.usualogin = rows[0].usualogin
+        req.session.usuamail = rows[0].usuaemail
+
+        console.log(req.session)
+        res.status(200).send(rows[0])
+      } else {
+        res.status(404).send(`Usuario o contraseña incorrecta por favor vuelva intentar`)
+      }
     }
-
-    db.collection('usuarios').find({usualogin: usualogin, usuapass: usuapass}, {usuapass: false})
-    .toArray((error, usuarios) => {
-      if(error){
-        res.status(500).send({
-            estatus: ERROR_BUSQUEDA,
-            mensaje: 'Error de conexion'
-        })
-      }
-      if(usuarios){
-        let user = usuarios[0]
-        req.session.usualogin = user.usualogin
-        req.session.usuamail = user.usuamail
-
-        console.log(req.session.usualogin)
-        res.status(200).send(usuarios[0])
-      }else {
-        res.status(200).send({
-            estatus: ERROR_BUSQUEDA,
-            mensaje: 'No se encuentra el usuario'
-        })
-      }
-
-    })
-
   })
 })
 
@@ -56,6 +51,7 @@ router.get('/logout', (req, res) => {
       if(error){
         console.log(error)
       }else{
+        console.log(req.session)
         res.status(200).send({
           tipo: SUCCESS,
           mensaje: "Sesion destruida satisfacttoriamente"

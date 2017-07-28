@@ -21,13 +21,9 @@
   </div>
   <div class="row">
     <div class="col m9">
-      <agm-map [latitude]="lat" [longitude]="lon">
-        <agm-marker
-          *ngFor="let marker of markers"
-          [latitude]="marker.lat"
-          [longitude]="marker.lon">
-        </agm-marker>
-      </agm-map>
+      <div class="map" id="map">
+
+      </div>
     </div>
   </div>
 </div>

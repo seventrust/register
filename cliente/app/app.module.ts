@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AllMaterialModule } from './app.material';
 import { routing } from './app.routing';
-import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -28,9 +27,6 @@ import { UsersComponent } from './users/users.component';
     UsersComponent
   ],
   imports: [
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCJA_CvZ9KjE3Uw_lbQivuQVwWC6lg_G-4'
-    }),
     BrowserModule,
     FormsModule,
     HttpModule,
