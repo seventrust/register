@@ -11,8 +11,8 @@ var SUCCESS = 1
 
 router.post('/authenticate', (req, res) => {
 
-    let usualogin = req.body.usualogin
-    let usuapass = req.body.usuapass
+  let usualogin = req.body.usualogin
+  let usuapass = req.body.usuapass
 
   mongo.connect(monUrl, (err, db) => {
     if(err){
@@ -26,9 +26,9 @@ router.post('/authenticate', (req, res) => {
     db.collection('usuarios').find({usualogin: usualogin, usuapass: usuapass}, {usuapass: false})
     .toArray((error, usuarios) => {
       if(error){
-        res.status(404).send({
+        res.status(500).send({
             estatus: ERROR_BUSQUEDA,
-            mensaje: 'No se encuentra el usuario'
+            mensaje: 'Error de conexion'
         })
       }
       if(usuarios){
@@ -39,7 +39,7 @@ router.post('/authenticate', (req, res) => {
         console.log(req.session.usualogin)
         res.status(200).send(usuarios[0])
       }else {
-        res.status(404).send({
+        res.status(200).send({
             estatus: ERROR_BUSQUEDA,
             mensaje: 'No se encuentra el usuario'
         })
