@@ -21,7 +21,7 @@ router.post('/authenticate', (req, res) => {
   let password = req.body.usuapass
   console.log(`Los datos ${usuario}, ${password}`)
 
-  var SQL = `SELECT usualogin, usuanombre, usuapaterno, usuaemail 
+  var SQL = `SELECT usualogin, usuanombre, usuapaterno, usuaemail
   FROM ma_usuario_web WHERE usualogin = '${usuario}' AND usuapass = '${password}'`
 
   conn.query(SQL, (error, rows, fields) => {
